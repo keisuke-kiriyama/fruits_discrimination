@@ -32,19 +32,10 @@ def load_data(csv, batch_size, shuffle = True, distored = True):
     filename, label = tf.decode_csv(value, [["path"], [1]], field_delim = " ")
     label = tf.cast(label, tf.int64)
     label = tf.one_hot(label, depth = NUM_CLASS, on_value = 1.0, off_value = 0.0, axis = -1)
-    (imgpath, ext) = os.path.splitext(filename)
-    n = EXTS.index(ext)
-
-    if n == 0 or n == 1:
-        jpeg = tf.read_file(filename)
-        image = tf.image.decode_jpeg(jpeg, channels=3)
-        image = tf.cast(image, tf.float32)
-        image.set_shape([IMAGE_SIZE, IMAGE_SIZE, 3])
-    elif n == 2:
-        png = tf.read_file(filename)
-        image = tf.image.decode_png(png, channels=3)
-        image = tf.cast(image, tf.float32)
-        image.set_shape([IMAGE_SIZE, IMAGE_SIZE, 3])
+    jpeg = tf.read_file(filename)
+    image = tf.image.decode_jpeg(jpeg, channels=3)
+    image = tf.cast(image, tf.float32)
+    image.set_shape([IMAGE_SIZE, IMAGE_SIZE, 3])
 
     if distored:
         cropsize = random.randint(INPUT_SIZE, INPUT_SIZE + (IMAGE_SIZE - INPUT_SIZE) / 2)

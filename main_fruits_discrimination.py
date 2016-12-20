@@ -9,8 +9,8 @@ import random
 import time
 import os
 
-from fruits_discrimination import input_image_data
-from fruits_discrimination import model_fruits_discrimination
+import input_image_data
+import model_fruits_discrimination
 
 LOGDIR = '/tmp/data.%s' % datetime.now().isoformat()
 print(LOGDIR)
@@ -20,7 +20,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('train', 'fruits_image_train.txt', 'File name of train data')
 flags.DEFINE_string('test', 'fruits_image_test.txt', 'File name of test data')
 flags.DEFINE_string('train_dir', LOGDIR, 'Directory to put the training data.')
-flags.DEFINE_integer('max_steps', 100000, 'Number of steps to run trainer.')
+flags.DEFINE_integer('max_steps', 100, 'Number of steps to run trainer.')
 flags.DEFINE_integer('batch_size', 120, 'Batch size Must divide evenly into the dataset sizes.')
 flags.DEFINE_float('learning_rate', 1e-4, 'Initial learning rate.')
 
@@ -63,7 +63,7 @@ def main(ckpt = None):
                 summary_str = sess.run(summary_op, feed_dict={keep_prob: 1.0})
                 summary_writer.add_summary(summary_str, step)
 
-            if step % 1000 == 0 or (step + 1) == FLAGS.max_steps or loss_result == :
+            if step % 1000 == 0 or (step + 1) == FLAGS.max_steps or loss_res == 0:
                 checkpoint_path = os.path.join(FLAGS.train_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
 
