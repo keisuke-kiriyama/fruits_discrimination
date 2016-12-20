@@ -9,4 +9,5 @@ import random
 import time
 import os
 
-import input_image_data
+from fruits_discrimination import input_image_data
+
