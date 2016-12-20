@@ -25,8 +25,8 @@ def search_dir(imgdir):
 
 
 def create_csv(dir_members, basename, num_of_train_image):
-    with open(basename + '_test.csv', 'w') as test_f:
-        with open(basename + '_train.csv', 'w') as train_f:
+    with open(basename + '_test.txt', 'w') as test_f:
+        with open(basename + '_train.txt', 'w') as train_f:
             csv_test_writer = csv.writer(test_f)
             csv_train_writer = csv.writer(train_f)
             for dir_member in dir_members:
