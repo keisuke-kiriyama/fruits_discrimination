@@ -7,9 +7,9 @@ import os
 import tensorflow as tf
 
 NUM_CLASS = 5
-IMAGE_SIZE = 28
-INPUT_SIZE = 20
-DST_INPUT_SIZE = 28
+IMAGE_SIZE = 56
+INPUT_SIZE = 56
+DST_INPUT_SIZE = 56
 NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN = 500
 
 FOOD_NAMES = {
@@ -29,26 +29,29 @@ def load_data(csv, batch_size, shuffle = True, distored = True):
     queue = tf.train.string_input_producer(csv, shuffle=shuffle)
     reader = tf.TextLineReader()
     key, value = reader.read(queue)
-    filename, label = tf.decode_csv(value, [["path"], [1]], field_delim = " ")
+    filename, label = tf.decode_csv(value, [["path"], [1]], field_delim = ",")
     label = tf.cast(label, tf.int64)
     label = tf.one_hot(label, depth = NUM_CLASS, on_value = 1.0, off_value = 0.0, axis = -1)
     jpeg = tf.read_file(filename)
     image = tf.image.decode_jpeg(jpeg, channels=3)
     image = tf.cast(image, tf.float32)
     image.set_shape([IMAGE_SIZE, IMAGE_SIZE, 3])
+    #image = tf.reshape(image, [56, 56, 3])
 
     if distored:
-        cropsize = random.randint(INPUT_SIZE, INPUT_SIZE + (IMAGE_SIZE - INPUT_SIZE) / 2)
-        framesize = INPUT_SIZE + (cropsize - INPUT_SIZE) * 2
-        image = tf.image.resize_image_with_crop_or_pad(image, framesize, framesize)
-        image = tf.random_crop(image, [cropsize, cropsize, 3])
+        pass
+        #cropsize = random.randint(INPUT_SIZE, INPUT_SIZE + (IMAGE_SIZE - INPUT_SIZE) / 2)
+        #framesize = INPUT_SIZE + (cropsize - INPUT_SIZE) * 2
+        #image = tf.image.resize_image_with_crop_or_pad(image, INPUT_SIZE, INPUT_SIZE)
+        #image = tf.random_crop(image, [cropsize, cropsize, 3])
+
         image = tf.image.random_flip_left_right(image)
         image = tf.image.random_brightness(image, max_delta=0.8)
         image = tf.image.random_contrast(image, lower=0.8, upper=1.0)
         image = tf.image.random_hue(image, max_delta=0.04)
         image = tf.image.random_saturation(image, lower=0.6, upper=1.4)
 
-    image = tf.image.resize_images(image, DST_INPUT_SIZE, DST_INPUT_SIZE)
+    #image = tf.image.resize_images(image, DST_INPUT_SIZE, DST_INPUT_SIZE)
     image = tf.image.per_image_whitening(image)
 
     min_fraction_of_examples_in_queue = 0.4

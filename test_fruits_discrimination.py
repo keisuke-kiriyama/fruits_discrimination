@@ -6,7 +6,7 @@ import tensorflow as tf
 import input_image_data
 import model_fruits_discrimination
 
-def main(ckpt_path, csv = 'test.txt'):
+def main(ckpt_path, csv = 'fruits_image_test.txt'):
     with tf.Graph().as_default():
         images, labels, filename = input_image_data.load_data_for_test([csv], 610)
         #print 'start', images, labels

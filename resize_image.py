@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 
 import cv2
-import numpy as np
 import os
 
 #file_dirにオリジナルディレクトリのpath指定
 #resize_dirに出力先ディレクトリのpath指定
 
-file_dir = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/images/test/lemon'
-resize_dir = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/images/test_resize/lemon_resize'
+file_dir = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/images_composite/peer'
 files = os.listdir(file_dir)
 for i, file in enumerate(files):
-    if i > 0:
+    if file.split('.')[0].split('_')[-1] == '0':
         file_path = file_dir + '/' + file
+        print(file_path)
+
         img = cv2.imread(file_path, cv2.IMREAD_COLOR)
 
-        size = (28, 28)
+        size = (56, 56)
         resize_img = cv2.resize(img, size)
-
-        cv2.imwrite(resize_dir + '/' + file, resize_img)
+        os.remove(file_path)
+        cv2.imwrite(file_path, resize_img)

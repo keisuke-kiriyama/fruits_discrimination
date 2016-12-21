@@ -36,13 +36,14 @@ def accuracy(logits, labels):
     return accuracy
 
 def inference(images_placeholder, keep_prob, image_size, num_classes):
-    x_image = tf.reshape(images_placeholder, [-1, image_size, image_size, 3])
-    print(x_image)
+    #x_image = tf.reshape(images_placeholder, [-1, image_size, image_size, 3])
+    #print(x_image)
 
     with tf.name_scope('conv1') as scope:
         W_conv1 = weight_variable([5, 5, 3, 32])
         b_conv1 = bias_variable([32])
-        h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
+        # h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
+        h_conv1 = tf.nn.relu(conv2d(images_placeholder, W_conv1) + b_conv1)
         print(h_conv1)
 
     with tf.name_scope('pool1') as scope:
@@ -61,16 +62,16 @@ def inference(images_placeholder, keep_prob, image_size, num_classes):
 
     with tf.name_scope('fc1') as scope:
         w = image_size / 4
-        W_fc1 = weight_variable([w * w * 64, 1024])
-        b_fc1 = bias_variable([1024])
-        h_pool2_flat = tf.reshape(h_pool2, [-1, w * w * 64])
+        W_fc1 = weight_variable([int(w * w * 64), 512])
+        b_fc1 = bias_variable([512])
+        h_pool2_flat = tf.reshape(h_pool2, [-1, int(w * w * 64)])
         print(h_pool2_flat)
         h_fc1 = tf.matmul(h_pool2_flat, W_fc1) + b_fc1
         h_fc1_drop = tf.nn.dropout(tf.nn.relu(h_fc1), keep_prob)
         print(h_fc1_drop)
 
     with tf.name_scope('fc2') as scope:
-        W_fc2 = weight_variable([1024, num_classes])
+        W_fc2 = weight_variable([512, num_classes])
         b_fc2 = bias_variable([num_classes])
         h_fc2 = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
         print(h_fc2)
