@@ -6,10 +6,11 @@ import os
 #file_dirにオリジナルディレクトリのpath指定
 #resize_dirに出力先ディレクトリのpath指定
 
-file_dir = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/images_composite/peer'
+file_dir = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/image_for_prediction'
 files = os.listdir(file_dir)
 for i, file in enumerate(files):
-    if file.split('.')[0].split('_')[-1] == '0':
+    #if file.split('.')[0].split('_')[-1] == '0':
+    if i > 0:
         file_path = file_dir + '/' + file
         print(file_path)
 
