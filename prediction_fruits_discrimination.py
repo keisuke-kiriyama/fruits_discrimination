@@ -12,10 +12,10 @@ def evaluation(img_path, ckpt_path):
     jpeg = tf.read_file(img_path)
     img = tf.image.decode_jpeg(jpeg, channels=3)
     img = tf.cast(img, tf.float32)
-    img.set_shape([input_image_data.IMAGE_SIZE, input_image_data.IMAGE_SIZE, 4])
+    img.set_shape([input_image_data.IMAGE_SIZE, input_image_data.IMAGE_SIZE, 3])
     #img = tf.image.resize_images(img, input_image_data.DST_INPUT_SIZE, input_image_data.DST_INPUT_SIZE)
     img = tf.image.per_image_whitening(img)
-    #img = tf.reshape(img, [-1, input_image_data.DST_INPUT_SIZE * input_image_data.DST_INPUT_SIZE * 3])
+    img = tf.reshape(img, [-1, input_image_data.DST_INPUT_SIZE * input_image_data.DST_INPUT_SIZE * 3])
 
     logits = model_fruits_discrimination.inference(img, 1.0, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
 
@@ -60,13 +60,12 @@ def evaluation(img_path, ckpt_path):
 
 def execute(img_paths, ckpt_path):
     res = []
-    for img_path in img_paths:
-        (rank, pred) = evaluation(img_path, ckpt_path)
-        res.append({
-            'file': img_path,
-            'top_member_id': pred,
-            'rank': rank
-        })
+    (rank, pred) = evaluation(img_path, ckpt_path)
+    res.append({
+        'file': img_path,
+        'top_member_id': pred,
+        'rank': rank
+    })
     return res
 
 
@@ -74,4 +73,5 @@ if __name__ == '__main__':
     ckpt_path = sys.argv[1]
     img_path = sys.argv[2]
 
-    print(execute([img_path], ckpt_path))
+    #print(execute(img_path, ckpt_path))
+    execute(img_path, ckpt_path)

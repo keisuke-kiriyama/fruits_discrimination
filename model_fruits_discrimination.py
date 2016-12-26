@@ -36,14 +36,14 @@ def accuracy(logits, labels):
     return accuracy
 
 def inference(images_placeholder, keep_prob, image_size, num_classes):
-    #x_image = tf.reshape(images_placeholder, [-1, image_size, image_size, 3])
+    x_image = tf.reshape(images_placeholder, [-1, image_size, image_size, 3])
     #print(x_image)
 
     with tf.name_scope('conv1') as scope:
         W_conv1 = weight_variable([5, 5, 3, 32])
         b_conv1 = bias_variable([32])
-        # h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
-        h_conv1 = tf.nn.relu(conv2d(images_placeholder, W_conv1) + b_conv1)
+        h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
+        #h_conv1 = tf.nn.relu(conv2d(images_placeholder, W_conv1) + b_conv1)
         print(h_conv1)
 
     with tf.name_scope('pool1') as scope:
