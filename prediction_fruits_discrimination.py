@@ -3,6 +3,7 @@
 import sys
 import numpy as np
 import tensorflow as tf
+import os
 import input_image_data
 import model_fruits_discrimination
 
@@ -29,6 +30,7 @@ def evaluation(img_path, ckpt_path):
 
     result = softmax[0]
     rates = [round(n * 100.0, 1) for n in result]
+    print(img_path)
     print(rates)
 
     pred = np.argmax(result)
@@ -58,7 +60,7 @@ def evaluation(img_path, ckpt_path):
 #         })
 #     return res
 
-def execute(img_paths, ckpt_path):
+def execute(img_path, ckpt_path):
     res = []
     (rank, pred) = evaluation(img_path, ckpt_path)
     res.append({
@@ -68,10 +70,18 @@ def execute(img_paths, ckpt_path):
     })
     return res
 
+def search_img(imgdir_path, ckpt_path):
+    file_list = os.listdir(imgdir_path)
+    for img_name in file_list:
+        if not img_name.endswith('.jpg'):
+            continue
+        img_path = os.path.join(imgdir_path, img_name)
+        execute(img_path, ckpt_path)
+
 
 if __name__ == '__main__':
     ckpt_path = sys.argv[1]
-    img_path = sys.argv[2]
-
+    imgdir_path = sys.argv[2]
+    search_img(imgdir_path, ckpt_path)
     #print(execute(img_path, ckpt_path))
-    execute(img_path, ckpt_path)
+    #execute(img_path, ckpt_path)
