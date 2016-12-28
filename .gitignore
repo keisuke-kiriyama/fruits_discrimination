@@ -26,6 +26,7 @@ wheels/
 *.egg
 images/
 images_composite/
+.idea/
 log/
 image_for_prediction/
 .DS_Store

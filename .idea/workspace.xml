@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d3205c8-ef2e-42d1-bc4f-faf22191d28c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/check_size_image.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/convert_png2jpg.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/create_csv_data.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fruits_image_test.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fruits_image_train.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/image_for_prediction/banana_eval1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/image_for_prediction/corn_eval1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/image_for_prediction/greengrape_eval1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/image_for_prediction/lemon_eval1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/image_for_prediction/peer_eval1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/input_image_data.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main_fruits_discrimination.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/model_fruits_discrimination.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/prediction_fruits_discrimination.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resize_image.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test_fruits_discrimination.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testdata.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/traindata.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
