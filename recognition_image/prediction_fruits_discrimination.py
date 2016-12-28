@@ -30,7 +30,7 @@ def evaluation(img_path, ckpt_path):
 
     result = softmax[0]
     rates = [round(n * 100.0, 1) for n in result]
-    print(img_path)
+    #print(img_path)
     print(rates)
 
     pred = np.argmax(result)
@@ -46,7 +46,8 @@ def evaluation(img_path, ckpt_path):
         })
     rank = sorted(foods, key=lambda x: x['rate'], reverse=True)
 
-    return (rank, pred)
+    #return (rank, pred)
+    return input_image_data.FOOD_NAMES[pred]
 
 # def execute(imgdir_path, ckpt_path):
 #     res = []
@@ -61,13 +62,14 @@ def evaluation(img_path, ckpt_path):
 #     return res
 
 def execute(img_path, ckpt_path):
-    res = []
-    (rank, pred) = evaluation(img_path, ckpt_path)
-    res.append({
-        'file': img_path,
-        'top_member_id': pred,
-        'rank': rank
-    })
+    res = evaluation(img_path, ckpt_path)
+    # (rank, pred) = evaluation(img_path, ckpt_path)
+    # res.append({
+    #     'file': img_path,
+    #     'top_member_id': pred,
+    #     'rank': rank
+    # })
+
     return res
 
 def search_img(imgdir_path, ckpt_path):
@@ -80,8 +82,11 @@ def search_img(imgdir_path, ckpt_path):
 
 
 if __name__ == '__main__':
-    ckpt_path = sys.argv[1]
-    imgdir_path = sys.argv[2]
+    recognition_dir = os.path.dirname(os.path.abspath(__file__))
+    log_dir = recognition_dir + '/../log'
+    ckpt_path = os.path.join(log_dir, 'model.ckpt-4999')
+    print(ckpt_path)
+    imgdir_path = sys.argv[1]
     search_img(imgdir_path, ckpt_path)
     #print(execute(img_path, ckpt_path))
     #execute(img_path, ckpt_path)
