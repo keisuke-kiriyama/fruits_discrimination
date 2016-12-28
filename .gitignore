@@ -27,6 +27,7 @@ wheels/
 images/
 images_composite/
 log/
+image_for_prediction/
 .DS_Store
 # PyInstaller
 #  Usually these files are written by a python script from a template
