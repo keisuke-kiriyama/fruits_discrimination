@@ -18,8 +18,9 @@ def evaluation(img_path, ckpt_path):
     img = tf.image.per_image_whitening(img)
     img = tf.reshape(img, [-1, input_image_data.DST_INPUT_SIZE * input_image_data.DST_INPUT_SIZE * 3])
 
-    logits = model_fruits_discrimination.inference(img, 1.0, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
-
+    #logits = model_fruits_discrimination.inference(img, 1.0, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
+    logits = model_fruits_discrimination.deep_inference(img, 1.0, input_image_data.DST_INPUT_SIZE,
+                                                   input_image_data.NUM_CLASS)
     sess = tf.InteractiveSession()
     saver = tf.train.Saver()
     sess.run(tf.initialize_all_variables())

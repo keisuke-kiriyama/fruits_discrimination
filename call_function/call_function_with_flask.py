@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, jsonify
+from flask import Flask, request, jsonify
 import uuid
 from werkzeug.utils import secure_filename
 import sys
@@ -7,7 +7,7 @@ import os
 call_func_dir = os.path.dirname(os.path.abspath(__file__))
 recog_img_dir = call_func_dir + '/../recognition_image'
 log_dir = call_func_dir + '/../log'
-ckpt_path = os.path.join(log_dir, 'model.ckpt-4999')
+ckpt_path = os.path.join(log_dir, 'model.ckpt-3000')
 sys.path.append(recog_img_dir)
 import prediction_fruits_discrimination
 

@@ -12,7 +12,7 @@ import os
 import input_image_data
 import model_fruits_discrimination
 
-LOGDIR = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/log'
+LOGDIR = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/log_modify'
 print(LOGDIR)
 
 flags = tf.app.flags
@@ -20,7 +20,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('train', 'fruits_image_train.txt', 'File name of train data')
 flags.DEFINE_string('test', 'fruits_image_test.txt', 'File name of test data')
 flags.DEFINE_string('train_dir', LOGDIR, 'Directory to put the training data.')
-flags.DEFINE_integer('max_steps', 5000, 'Number of steps to run trainer.')
+flags.DEFINE_integer('max_steps', 8000, 'Number of steps to run trainer.')
 flags.DEFINE_integer('batch_size', 10, 'Batch size Must divide evenly into the dataset sizes.')
 flags.DEFINE_float('learning_rate', 1e-4, 'Initial learning rate.')
 
@@ -30,7 +30,8 @@ def main(ckpt = None):
         keep_prob = tf.placeholder("float")
 
         images, labels, _ = input_image_data.load_data([FLAGS.train], FLAGS.batch_size, shuffle = True, distored = True)
-        logits = model_fruits_discrimination.inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
+        #logits = model_fruits_discrimination.inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
+        logits = model_fruits_discrimination.deep_inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
         loss_value = model_fruits_discrimination.loss(logits, labels)
         train_op = model_fruits_discrimination.training(loss_value, FLAGS.learning_rate)
         acc = model_fruits_discrimination.accuracy(logits, labels)
@@ -66,9 +67,9 @@ def main(ckpt = None):
                 checkpoint_path = os.path.join(FLAGS.train_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=step)
 
-            if loss_res == 0:
-                print('loss is zero')
-                break
+            # if loss_res == 0:
+            #     print('loss is zero')
+            #     break
 
 if __name__ == '__main__':
     ckpt = None

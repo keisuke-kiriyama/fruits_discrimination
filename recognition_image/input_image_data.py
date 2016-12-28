@@ -40,10 +40,10 @@ def load_data(csv, batch_size, shuffle = True, distored = True):
 
     if distored:
         pass
-        #cropsize = random.randint(INPUT_SIZE, INPUT_SIZE + (IMAGE_SIZE - INPUT_SIZE) / 2)
-        #framesize = INPUT_SIZE + (cropsize - INPUT_SIZE) * 2
-        #image = tf.image.resize_image_with_crop_or_pad(image, INPUT_SIZE, INPUT_SIZE)
-        #image = tf.random_crop(image, [cropsize, cropsize, 3])
+        cropsize = random.randint(INPUT_SIZE, INPUT_SIZE + (IMAGE_SIZE - INPUT_SIZE) / 2)
+        framesize = INPUT_SIZE + (cropsize - INPUT_SIZE) * 2
+        image = tf.image.resize_image_with_crop_or_pad(image, framesize, framesize)
+        image = tf.random_crop(image, [cropsize, cropsize, 3])
 
         image = tf.image.random_flip_left_right(image)
         image = tf.image.random_brightness(image, max_delta=0.8)
