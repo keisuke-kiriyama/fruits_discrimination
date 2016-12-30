@@ -7,11 +7,13 @@ import os
 import input_image_data
 import model_fruits_discrimination
 
-def evaluation(img_path, ckpt_path):
+def evaluation(img, ckpt_path):
     tf.reset_default_graph()
 
-    jpeg = tf.read_file(img_path)
-    img = tf.image.decode_jpeg(jpeg, channels=3)
+    #img = np.array(img)
+
+    #jpeg = tf.read_file(img)
+    #img = tf.image.decode_jpeg(img, channels=3)
     img = tf.cast(img, tf.float32)
     img.set_shape([input_image_data.IMAGE_SIZE, input_image_data.IMAGE_SIZE, 3])
     #img = tf.image.resize_images(img, input_image_data.DST_INPUT_SIZE, input_image_data.DST_INPUT_SIZE)
@@ -62,8 +64,8 @@ def evaluation(img_path, ckpt_path):
 #         })
 #     return res
 
-def execute(img_path, ckpt_path):
-    res = evaluation(img_path, ckpt_path)
+def execute(img, ckpt_path):
+    res = evaluation(img, ckpt_path)
     # (rank, pred) = evaluation(img_path, ckpt_path)
     # res.append({
     #     'file': img_path,
@@ -73,21 +75,21 @@ def execute(img_path, ckpt_path):
 
     return res
 
-def search_img(imgdir_path, ckpt_path):
-    file_list = os.listdir(imgdir_path)
-    for img_name in file_list:
-        if not img_name.endswith('.jpg'):
-            continue
-        img_path = os.path.join(imgdir_path, img_name)
-        execute(img_path, ckpt_path)
+# def search_img(imgdir_path, ckpt_path):
+#     file_list = os.listdir(imgdir_path)
+#     for img_name in file_list:
+#         if not img_name.endswith('.jpg'):
+#             continue
+#         img_path = os.path.join(imgdir_path, img_name)
+#         execute(img_path, ckpt_path)
 
 
-if __name__ == '__main__':
-    recognition_dir = os.path.dirname(os.path.abspath(__file__))
-    log_dir = recognition_dir + '/../log'
-    ckpt_path = os.path.join(log_dir, 'model.ckpt-4999')
-    print(ckpt_path)
-    imgdir_path = sys.argv[1]
-    search_img(imgdir_path, ckpt_path)
+# if __name__ == '__main__':
+#     recognition_dir = os.path.dirname(os.path.abspath(__file__))
+#     log_dir = recognition_dir + '/../log'
+#     ckpt_path = os.path.join(log_dir, 'model.ckpt-4999')
+#     print(ckpt_path)
+#     imgdir_path = sys.argv[1]
+#     search_img(imgdir_path, ckpt_path)
     #print(execute(img_path, ckpt_path))
     #execute(img_path, ckpt_path)
