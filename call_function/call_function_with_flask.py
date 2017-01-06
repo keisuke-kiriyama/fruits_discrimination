@@ -18,6 +18,9 @@ import prediction_fruits_discrimination
 app = Flask(__name__)
 app.debug = True
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"message": "ok"})
 
 @app.route('/upload', methods=['POST'])
 def upload():
