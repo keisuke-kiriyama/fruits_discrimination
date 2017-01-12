@@ -48,6 +48,15 @@ def upload():
     return jsonify({'results':res})
     #return jsonify({'results': "uploaded_image"})
 
+@app.route('/post', methods=['POST'])
+def post_img():
+    uploaded_image = request.files['file']
+    img = Image.open(io.BytesIO(uploaded_image.read()))
+    img = np.array(img)
+    res = prediction_fruits_discrimination.execute(img, ckpt_path)
+    return jsonify({'results':res})
+
+
 @app.route('/show', methods=['GET'])
 def show():
     # uploaded_image = request.files['file']
