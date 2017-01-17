@@ -25,6 +25,7 @@ wheels/
 .installed.cfg
 *.egg
 images/
+images_texture/
 images_composite/
 .idea/
 log/
