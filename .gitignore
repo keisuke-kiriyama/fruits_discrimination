@@ -26,6 +26,7 @@ wheels/
 *.egg
 images/
 images_texture/
+images_texture_resize/
 images_composite/
 .idea/
 log/

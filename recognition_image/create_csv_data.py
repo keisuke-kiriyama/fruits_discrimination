@@ -52,4 +52,4 @@ if __name__ == '__main__':
         sys.exit('%s is not directory' % imgdir)
 
     dir_members = search_dir(imgdir)
-    create_csv(dir_members, 'fruits_image', num_of_train_image)
+    create_csv(dir_members, 'texture_image', num_of_train_image)
