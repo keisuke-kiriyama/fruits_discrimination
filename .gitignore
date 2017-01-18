@@ -28,6 +28,8 @@ images/
 images_texture/
 images_texture_resize/
 images_composite/
+log_texture/
+log_texture_failed/
 .idea/
 log/
 image_for_prediction/
