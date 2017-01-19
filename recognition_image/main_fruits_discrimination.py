@@ -20,8 +20,8 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('train', 'texture_image_train.txt', 'File name of train data')
 flags.DEFINE_string('test', 'texture_image_test.txt', 'File name of test data')
 flags.DEFINE_string('train_dir', LOGDIR, 'Directory to put the training data.')
-flags.DEFINE_integer('max_steps', 30000, 'Number of steps to run trainer.')
-flags.DEFINE_integer('batch_size', 80, 'Batch size Must divide evenly into the dataset sizes.')
+flags.DEFINE_integer('max_steps', 1001, 'Number of steps to run trainer.')
+flags.DEFINE_integer('batch_size', 200, 'Batch size Must divide evenly into the dataset sizes.')
 flags.DEFINE_float('learning_rate', 1e-4, 'Initial learning rate.')
 
 
@@ -30,6 +30,7 @@ def main(ckpt = None):
         keep_prob = tf.placeholder("float")
 
         images, labels, _ = input_image_data.load_data([FLAGS.train], FLAGS.batch_size, shuffle = True, distored = True)
+        #logits = model_fruits_discrimination.texture_inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
         logits = model_fruits_discrimination.inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
         #logits = model_fruits_discrimination.deep_inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
         loss_value = model_fruits_discrimination.loss(logits, labels)

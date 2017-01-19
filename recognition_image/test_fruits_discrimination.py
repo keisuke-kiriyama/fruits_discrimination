@@ -6,14 +6,14 @@ import tensorflow as tf
 import input_image_data
 import model_fruits_discrimination
 
-def main(ckpt_path, csv = 'fruits_image_test.txt'):
+def main(ckpt_path, csv):
     with tf.Graph().as_default():
         images, labels, filename = input_image_data.load_data_for_test([csv], 610)
         #print 'start', images, labels
         keep_prob = tf.placeholder("float")
 
-        #logits = model_fruits_discrimination.inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
-        logits = model_fruits_discrimination.deep_inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
+        logits = model_fruits_discrimination.inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
+        #logits = model_fruits_discrimination.deep_inference(images, keep_prob, input_image_data.DST_INPUT_SIZE, input_image_data.NUM_CLASS)
         acc = model_fruits_discrimination.accuracy(logits, labels)
 
         saver = tf.train.Saver()
