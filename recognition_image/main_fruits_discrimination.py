@@ -12,15 +12,15 @@ import os
 import input_image_data
 import model_fruits_discrimination
 
-LOGDIR = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/log_texture'
+LOGDIR = '/Users/kiriyamakeisuke/practiceTensorFlow/fruits_discrimination/log_texture_gray'
 print(LOGDIR)
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
-flags.DEFINE_string('train', 'texture_image_train.txt', 'File name of train data')
-flags.DEFINE_string('test', 'texture_image_test.txt', 'File name of test data')
+flags.DEFINE_string('train', 'texture_image_gray_train.txt', 'File name of train data')
+flags.DEFINE_string('test', 'texture_image_gray_test.txt', 'File name of test data')
 flags.DEFINE_string('train_dir', LOGDIR, 'Directory to put the training data.')
-flags.DEFINE_integer('max_steps', 1001, 'Number of steps to run trainer.')
+flags.DEFINE_integer('max_steps', 5000, 'Number of steps to run trainer.')
 flags.DEFINE_integer('batch_size', 200, 'Batch size Must divide evenly into the dataset sizes.')
 flags.DEFINE_float('learning_rate', 1e-4, 'Initial learning rate.')
 

@@ -28,6 +28,9 @@ images/
 images_texture/
 images_texture_resize/
 images_composite/
+images_texture_resize_gray/
+log_texture_gray/
+log_texture_succeeded/
 log_texture/
 images_texture_resize_copy/
 log_texture_failed/

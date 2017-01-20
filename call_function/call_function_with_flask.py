@@ -14,8 +14,8 @@ from io import BytesIO
 
 call_func_dir = os.path.dirname(os.path.abspath(__file__))
 recog_img_dir = call_func_dir + '/../recognition_image'
-log_dir = call_func_dir + '/../log_modify'
-ckpt_path = os.path.join(log_dir, 'model.ckpt-3000')
+log_dir = call_func_dir + '/../log_texture_gray'
+ckpt_path = os.path.join(log_dir, 'model.ckpt-2000')
 sys.path.append(recog_img_dir)
 import prediction_fruits_discrimination
 

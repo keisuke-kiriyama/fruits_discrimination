@@ -43,7 +43,7 @@ def main(ckpt_path, csv):
 
 
 if __name__ == '__main__':
-    ckpt_path = sys.argv[1]
-    csv = sys.argv[2]
+    csv = sys.argv[1]
+    ckpt_path = sys.argv[2]
     #print ckpt_path
     main(ckpt_path, csv)
